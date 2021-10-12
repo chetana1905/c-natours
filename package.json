@@ -1,0 +1,31 @@
+{
+  "name": "c-natours",
+  "version": "1.0.0",
+  "description": "this is a node js, express js and mongo db project.",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "nodemon server.js",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js/ --out-file bundle.js"
+  },
+  "author": "chetna",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.5",
+    "multer": "^1.4.3",
+    "nodemailer": "^6.6.3",
+    "parcel-bundler": "^1.12.5",
+    "pug": "^3.0.2",
+    "sharp": "^0.29.1",
+    "stripe": "^8.176.0",
+    "validator": "^13.6.0"
+  }
+}

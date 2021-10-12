@@ -1,0 +1,37 @@
+extend base
+mixin cart_data(icon , span_data)
+    .cart__data
+        svg(class='cart__icon')
+            use(xlink:href=`${icon}` fill='green') 
+        span #{span_data}
+
+mixin cart_footer_data(value , text , class_name='')
+    p(class=class_name)
+        span(class='cart__footer-value')  #{value}
+        span(class='cart__footer-text')  #{text}
+
+block content 
+    .main
+        .cart-container
+            for tour in tours 
+                .cart
+                    .cart-header
+                        .cart-picture
+                            .cart-picture-overlay 
+                            img(class="cart-cover-img" src=`images/tours/${tour.imageCover}`, alt=`${tour.slug}`) 
+                        h3(class='tour-headings')
+                            span(class='head') #{tour.name.toUpperCase()}
+                    .cart-details 
+                        h4(class='cart__sub-heading') #{tour.difficulty.toUpperCase()} #{tour.duration}-day tour 
+                        p(class='cart__text') #{tour.summary}
+                        +cart_data('/images/icons/map_pin.svg',tour.startLocation.description)
+                        +cart_data('/images/icons/map_pin.svg', `${new Date(tour.startDates[0]).toLocaleDateString('Default',{month:'short'})} ${new Date(tour.startDates[0]).getFullYear()}`)
+                        +cart_data('/images/icons/map_pin.svg',`${tour.locations.length} stops`)
+                        +cart_data('/images/icons/map_pin.svg',`${tour.maxGroupSize} people`)
+                    .cart-footer
+                        +cart_footer_data(tour.price, 'per person')
+                        +cart_footer_data(tour.ratingsAverage,`rating(${tour.ratingsQuantity})` ,'cart_ratings')
+                        a(class='btn' href=`/tour/${tour._id}`) Details 
+                            a(class='btn' href=`#`) Rate this Tour
+                    
+

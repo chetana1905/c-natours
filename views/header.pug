@@ -1,0 +1,18 @@
+nav(class='navbar navbar-expand-md')
+    div(class='col-md-5')
+        a(href='/tours' id="logo_label") NATOURS 
+        
+    div(class='col-md-2')
+        img(id='logo' src='/images/natours/logo_2.jpg', alt='logo')
+        
+    div(class='col-md-5')
+        div(style="float:right;padding:10px")
+            if user
+                a(class="link" href="/api/v1/user/logout" style='margin-right:3rem') LOG OUT
+                |      
+                a(href="/me" style='text-decoration: none') 
+                    img(src=`/images/user/${user.photo}`, class='nav_avatar' alt="")
+                    span(class="link") #{user.name.split(' ')[0].toUpperCase()}
+            if(title=='Sign Up' || title =='Forget Password')
+                a(class="link" href="/login") LOG IN
+            

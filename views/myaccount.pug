@@ -1,0 +1,19 @@
+extends base
+mixin menu_list(text, url,active='')
+     li(class=`menu-li${active}`)
+         a(href=url) #{text}
+            svg(class='menu_svg')
+                use(fill='green' xlink:href="img/icons.svg#icon-star")
+
+block content 
+    .main
+        .user-account
+            nav(class='account-menu')
+                ul(style='list-style: none;padding:0') 
+                    +menu_list('SETTINGS','/me','-active')
+                    +menu_list('CHANGE PASSWORD','/change-password')
+                    +menu_list('MY BOOKINGS', '/my-bookings')
+                    +menu_list('MY REVIEWS', '#')
+                    +menu_list('BILLING', '#')
+            .account-content
+                block details

@@ -1,0 +1,14 @@
+head  
+  title #{title}
+  link(rel="stylesheet", href="/css/style.css")
+  link(rel="stylesheet", href="/bootstrap/bootstrap.min.css")
+  script(src="/bootstrap/bootstrap.min.js") 
+body 
+    include header 
+    div(class='alert')
+            span 
+    block content 
+
+    include footer
+
+script(src="/js/bundle.js") 

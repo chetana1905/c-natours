@@ -1,0 +1,19 @@
+extend base
+
+block content
+    div(class='wrapper')
+        form(action="" class="login-form  form-group")
+            h4(style="color:#538536;text-align:center" ) Login
+            br
+            input(type="email", name="email" class="form-control" placeholder='Enter Email')
+            br
+            input(type="password", name="password" class="form-control" placeholder='Enter Password') 
+            br
+            input(type="button", value="Login" class="login-btn btn btn-success form-control")
+            br
+            br
+            a(href="/forgot-pw" id="forgot_pw") Forgot your Password?
+            br
+            span Don't have an account? 
+            a(href="/signup" id="signup") Sign Up
+    

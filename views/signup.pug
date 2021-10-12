@@ -1,0 +1,25 @@
+extends base
+
+
+block content 
+    .signup-form
+        h2(class='heading-secondary bottom_space') Create Your Account 
+        form(class='form form--signup')
+            .form__group.bottom_space
+                label(class='form__label' for='name') Your Name
+                input(type='text' name ='name' id='name' class='form__input' placeholder='abc' required)
+            
+            .form-group.bottom_space
+                label(class='form__label' for='email') Your Email
+                input(type='email' name ='email' id='email' class='form__input' placeholder='abc@exapmple.com' required)
+            
+            .form-group.bottom_space
+                label(class='form__label' for='password') Password
+                input(name ='password' type="password" id='password' class='form__input' placeholder='*******' required)
+            
+            .form-group.bottom_space
+                label(class='form__label' for='confirm_pw') Confirm Password
+                input( name ='confirm_pw' type='password' id='confirm_pw' class='form__input' placeholder='' required)
+            
+            .form-group.bottom_space
+                button(type='button', class='btn btn-success form-control sign-up') SIGN UP

@@ -1,0 +1,87 @@
+extend  base
+
+mixin quick_facts(label, value ,url , image=false)
+    .overview-box__detail
+        if(image)
+            img( class='overview-box__img' src=`/images/user/${url}`, alt="")
+        else
+            svg(class='overview-box__icon')
+                use(fill='green' href=`/images/icons/${url}`)
+        span(class='overview-box__label') #{label}
+        span(class='overview-box__text') #{value}
+
+mixin user_reviews(url, name , review, rating)
+    .reviews__card
+        .reviews__avatar
+            img(class='reviews__avatar-img' src=`/images/user/${url}`, alt="")
+            h6(class='reviews__user') #{name}
+        p(class='reviews__text') #{review}
+        .reviews__rating
+            for ratings in [1,2,3,4,5]
+                svg(class=`reviews__star ${ratings < rating ? 'reviews__star--active' :''}`)
+                    use(xlink:href="/img/icons.svg#icon-star")
+                    
+block content 
+    section(class='section-header')
+        .header__hero
+            .header__hero-overlay &nbsp;
+            img(class='header__hero-img' src=`/images/tours/${tour.imageCover}`, alt="")
+        .heading-box 
+            h1(class='heading-primary')
+                span #{tour.name.toUpperCase()}
+            .heading-box__group
+                .heading-box__detail
+                    svg(class='heading-box__icon')
+                        use()
+                    span #{tour.duration} Days
+                .heading-box__detail
+                    svg(class='heading-box__icon')
+                        use()
+                    span #{tour.startLocation.description} 
+    section(class='section-description')
+        .overview-box
+            div 
+                .overview-box__group
+                    h2(class='heading-secondary bottom_space') Quick Facts
+                    +quick_facts('Next Date' , `${new Date(tour.startDates[0]).toLocaleDateString('Default',{month:'short'})} ${new Date(tour.startDates[0]).getFullYear()} ` , '')
+                    +quick_facts('Difficulty',tour.difficulty,'')
+                    +quick_facts('Participants', `${tour.maxGroupSize} People`,'')
+                    +quick_facts('Rating' , `${tour.ratingsAverage}/5`,'')
+
+                .overview-box__group
+                    h2(class='heading-secondary bottom_space') Your Tour Guides
+                    for guide in tour.guides
+                        +quick_facts(guide.role , guide.name, guide.photo, true)
+                    
+
+        .description-box
+            h2(class='heading-secondary bottom_space') About #{tour.name} tour
+            p(class='description__text') #{tour.description}
+
+    section(class='section-picture')
+        .picture-box 
+            img(class='picture-box__img picture-box__img--1' src=`/images/tours/${tour.images[0]}`, alt="")
+        .picture-box 
+            img(class='picture-box__img picture-box__img--2' src=`/images/tours/${tour.images[1]}`, alt="")
+        .picture-box 
+            img(class='picture-box__img picture-box__img--3' src=`/images/tours/${tour.images[2]}`, alt="")
+    
+    section(class='section-map')
+        .mapboxgl-map(id="map")
+
+    
+    section(class='section-reviews')
+        .reviews
+            for review in tour.reviews
+                +user_reviews(review.user.photo, review.user.name, review.review,review.rating)
+
+    section(class='section-cta')
+        .cta    
+            .cta__img.cta__img--logo
+                //- img(src=`/images/natours/logo_2.jpg`, alt="logo")
+            img(class='cta__img cta__img--1' src=`/images/tours/${tour.images[1]}`, alt="Tour pic1")
+            img(class='cta__img cta__img--2' src=`/images/tours/${tour.images[2]}`, alt="Tour pic2")
+            .cta__content
+                h2(class='heading-secondary') What are you waiting for?
+                p(class='cta__text') #{tour.duration} days. 1 adventure. Infinite memories. Make it yours today!
+                button(class='btn cta-button' id="book_tour" data-tour_id=`${tour._id}`)  Book Now
