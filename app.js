@@ -1,5 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const compression = require("compression");
 const tourApiRouter = require("./api/routes/TourRoute");
 const userApiRouter = require("./api/routes/UserRoute");
 const reviewApiRouter = require("./api/routes/ReviewRoute");
@@ -12,12 +13,14 @@ const AppError = require("./utils/AppError");
 const App = express();
 const path = require("path");
 
+
 // middlewares
 App.set("view engine" , "pug");
 App.set("views", path.join(__dirname,"./views"));
 App.use(express.static(path.join(__dirname,"./public")));
 App.use(express.json()); // used to parse req body
 App.use(cookieParser());// used to parse cookies in req
+App.use(compression());
 
 // Frontend Routes
 App.use("/", viewRoutes);

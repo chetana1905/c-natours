@@ -19,7 +19,7 @@ exports.changePassword = (req, res, next) => {
 
 exports.mybookings = async(req, res, next) => {
     try{
-        if(req.query.booked_tour){
+        if(req.query.booked_tour){ // this redirected from stripe checkout 
             const tour = await tourModel.findById(req.query.booked_tour);
             // save data in booking model
             const booking_saved = await BookingModel.create({
@@ -33,10 +33,11 @@ exports.mybookings = async(req, res, next) => {
             const tours = mytours.map(mytour => {
                 return mytour.tour;
             })
-            console.log(tours);
+            
             res.status(200).render('tours',{
                 title : 'My Tours',
-                tours
+                tours,
+                path: req.path
             });
         }
         

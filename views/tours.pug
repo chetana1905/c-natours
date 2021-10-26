@@ -32,6 +32,7 @@ block content
                         +cart_footer_data(tour.price, 'per person')
                         +cart_footer_data(tour.ratingsAverage,`rating(${tour.ratingsQuantity})` ,'cart_ratings')
                         a(class='btn' href=`/tour/${tour._id}`) Details 
-                            a(class='btn' href=`#`) Rate this Tour
+                        if(path == '/my-bookings')
+                          a(class='btn' style='padding: 0.1rem 1.5rem !important;height: 39px;margin-left: 0.5rem;' href=`#`) Rate tour
                     
 

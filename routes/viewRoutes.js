@@ -5,6 +5,9 @@ const AuthController = require("../api/controllers/authController");
 const AccountController = require('../controllers/accountController');
 const Router = express.Router();
 
+Router.get("/", (req, res, next) => {
+    res.redirect("/login");
+});
 Router.get("/login", LoginController.login);
 Router.get("/signup",LoginController.signup);
 Router.get('/forgot-pw', LoginController.forgotPw);
