@@ -2,7 +2,7 @@ const express = require("express");
 const LoginController = require('../controllers/loginController');
 const TourController = require('../controllers/TourController');
 const AuthController = require("../api/controllers/authController");
-const AccountController = require('../controllers/accountController');
+const AccountController = require('../controllers/AccountController');
 const Router = express.Router();
 
 Router.get("/", (req, res, next) => {
