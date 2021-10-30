@@ -7,7 +7,7 @@ dotenv.config({path:'./config.env'});
 
 // configure mongo db ann connect to it
 const database = process.env.ATLAS_DB.replace("<PASSWORD>", process.env.ATLAS_DB_PW);
-console.log("database",database);
+
 // connecting to mongo db atlas server using connect method which returns promise
 mongoose.connect(database)
 .then((res)=> {

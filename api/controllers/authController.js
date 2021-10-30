@@ -23,7 +23,7 @@ const sendToken = (userId,res,statusCode) => {
     const cookieOption = {
         expires : new Date(Date.now() + process.env.JWT_EXPIRES * 24*60*60*1000),
         http:true,
-        // secure:true
+        secure:true
     }
 
     // send cookies in response
