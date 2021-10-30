@@ -3,8 +3,11 @@ const tourModel = require('../../models/TourModel');
 
 
 exports.bookTour = async(req, res, next) => {
-   console.log("request in book",req);
-    try{
+   console.log("request protocol",req.protocol);
+   console.log("request hostname",req.hostname);
+   console.log("req host", req.host);
+    try
+    {
         const Stripe = require('stripe')(process.env.STRIPE_SK);
         const tour = await tourModel.findById(req.body.tourId);  
         const response =  await Stripe.checkout.sessions.create({
