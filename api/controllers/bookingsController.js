@@ -3,13 +3,13 @@ const tourModel = require('../../models/TourModel');
 
 
 exports.bookTour = async(req, res, next) => {
-   
+   console.log("request in book",req);
     try{
         const Stripe = require('stripe')(process.env.STRIPE_SK);
-        const tour = await tourModel.findById(req.body.tourId);
+        const tour = await tourModel.findById(req.body.tourId);  
         const response =  await Stripe.checkout.sessions.create({
-            success_url : `${req.protocol}://${req.hostname}:${process.env.PORT}/my-bookings?booked_tour=${req.body.tourId}`,
-            cancel_url : `${req.protocol}://${req.hostname}:${process.env.PORT}/tour/${req.body.tourId}`,
+            success_url : `${req.protocol}://${req.hostname}/my-bookings?booked_tour=${req.body.tourId}`,
+            cancel_url : `${req.protocol}://${req.hostname}/tour/${req.body.tourId}`,
             line_items:[
                 {
                   // TODO: replace this with the `price` of the product you want to sell
