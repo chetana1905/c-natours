@@ -16,6 +16,10 @@ const App = express();
 App.enable('trust proxy'); // used to ablt to read req.headers['x-forwarded-proto'] value as heroku proxy changes req
 const path = require("path");
 
+/* this must be used before express.json() as the req should be in raw form to be handle
+Also we dont need to use npm bodyparser  middleware instead we can use express.raw() 
+*/
+App.use("/webhook-checkout", express.raw({type: 'application/json'}), bookingController.webhookCheckout);
 
 // middlewares
 App.set("view engine" , "pug");
