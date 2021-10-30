@@ -1,6 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const compression = require("compression");
+const cors = require('cors');
 const tourApiRouter = require("./api/routes/TourRoute");
 const userApiRouter = require("./api/routes/UserRoute");
 const reviewApiRouter = require("./api/routes/ReviewRoute");
@@ -23,7 +24,9 @@ App.use(express.static(path.join(__dirname,"./public")));
 App.use(express.json()); // used to parse req body
 App.use(cookieParser());// used to parse cookies in req
 App.use(compression());
-
+App.use(cors());
+App.options("*", cors());
+// 
 // Frontend Routes
 App.use("/", viewRoutes);
 
