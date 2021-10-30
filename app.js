@@ -12,7 +12,7 @@ const ErrorHandler = require("./controllers/ErrorController");
 const AppError = require("./utils/AppError");
 const App = express();
 
-App.enable('trust proxy'); // used to make this work - req.headers['x-forwarded-proto'] === 'https' as heroku proxy changes req
+App.enable('trust proxy'); // used to ablt to read req.headers['x-forwarded-proto'] value as heroku proxy changes req
 const path = require("path");
 
 
