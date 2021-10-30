@@ -22,9 +22,11 @@ const sendToken = (userId,res,statusCode) => {
     // set cookie options
     const cookieOption = {
         expires : new Date(Date.now() + process.env.JWT_EXPIRES * 24*60*60*1000),
-        http:true,
-        secure:true
+        http:true
     }
+
+    if(req.secure || req.headers['x-forwarded-proto'] === 'https')
+        cookieOption.secure = true;
 
     // send cookies in response
     res.cookie("jwt",token , cookieOption);

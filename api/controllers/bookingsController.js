@@ -3,9 +3,6 @@ const tourModel = require('../../models/TourModel');
 
 
 exports.bookTour = async(req, res, next) => {
-   console.log("request protocol",req.protocol);
-   console.log("request hostname",req.hostname);
-   console.log("req host", req.host);
     try
     {
         const Stripe = require('stripe')(process.env.STRIPE_SK);
