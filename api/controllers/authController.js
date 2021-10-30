@@ -14,7 +14,7 @@ const signJwt = (userId) => {
 }
 
 //sending token in response
-const sendToken = (userId,res,statusCode) => {
+const sendToken = (userId,res,req, statusCode) => {
 
     // sign token
     const token = signJwt(userId);
@@ -22,11 +22,10 @@ const sendToken = (userId,res,statusCode) => {
     // set cookie options
     const cookieOption = {
         expires : new Date(Date.now() + process.env.JWT_EXPIRES * 24*60*60*1000),
-        http:true
+        http:true,
+        secure: req.secure || req.headers['x-forwarded-proto'] === 'https' // to make this work use trust proxy middleware in app.js
     }
 
-    if(req.secure || req.headers['x-forwarded-proto'] === 'https')
-        cookieOption.secure = true;
 
     // send cookies in response
     res.cookie("jwt",token , cookieOption);
@@ -144,7 +143,7 @@ exports.login = async(req, res , next) => {
         }
         
         //sends token in response 
-        sendToken(user._id,res, 200);
+        sendToken(user._id,res,req, 200);
     }catch(err){
         next(err);
     }
@@ -182,7 +181,7 @@ exports.signup = async(req, res, next) => {
         email.welcomeMail();
         
         // send token in response
-        sendToken(user._id, res, 200);
+        sendToken(user._id, res, req, 200);
             
     }catch(err){
         next(err);
@@ -277,7 +276,7 @@ exports.updatePassword = async(req,res,next) => {
          await user.save({validateBeforeSave : false}); // user.findAndUpdate() will not  execute all document middlewares
         
         // send jwt token
-       sendToken(user, res , 200);
+       sendToken(user, res ,req, 200);
 
     }catch(err){
         next(err);
