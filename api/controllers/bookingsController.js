@@ -4,6 +4,7 @@ const userModel = require('../../models/UserModel');
 
 
 const createBooking = async(session) => {
+    console.log("in craete booking", session);
     const user = userModel.findOne({'email':session.customer_email},{_id}) ;
     const tour = session.client_reference_id;
     const amount = session.amount_total /100;
@@ -53,18 +54,18 @@ exports.bookTour = async(req, res, next) => {
 exports.webhookCheckout = (req, res, next) => {
     // get stripe signature 
     const sign = req.headers['stripe-signature'];
-  
-    let event = '';
+    console.log(" webhook req body -", req.body);
+    let event;
     try{
         const Stripe = require('stripe')(process.env.STRIPE_SK);
-        event = Stripe.Webhooks.constructEvent(
+        event = Stripe.webhooks.constructEvent(
             req.body,
             sign,
             process.env.STRIPE_WEBHOOK_SECRET
         );
 
     }catch(err){
-      return res.status(400).send(`Webhook  error ${err.message}`);
+      return res.status(400).send(`Webhook  error:  ${err.message}`);
     }
 
     if(event.type == 'checkout.session.completed'){
