@@ -5,7 +5,7 @@ const userModel = require('../../models/UserModel');
 
 const createBooking = async(session) => {
     console.log("in craete booking", session);
-    const user = userModel.findOne({'email':session.customer_email},{_id:1}) ;
+    const user = await userModel.findOne({'email':session.customer_email},{_id:1}) ;
     const tour = session.client_reference_id;
     const amount = session.amount_total /100;
     console.log("booking details", {tour, user, amount});
